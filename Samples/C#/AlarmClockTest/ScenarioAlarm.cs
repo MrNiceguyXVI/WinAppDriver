@@ -52,7 +52,7 @@ namespace AlarmClockTest
             Thread.Sleep(TimeSpan.FromSeconds(3));
 
             // Verify that a new alarm entry is created with the given hour, minute, and name
-            WindowsElement alarmEntry = session.FindElementByXPath($"//ListItem[starts-with(@Name, \"{NewAlarmName}\")]");
+            WindowsElement alarmEntry = session.FindElementByXPath($"//ListItem[contains(@Name, \"{NewAlarmName}\")]");
             Assert.IsNotNull(alarmEntry);
             Assert.IsTrue(alarmEntry.Text.Contains("3"));
             Assert.IsTrue(alarmEntry.Text.Contains("55"));
@@ -73,12 +73,12 @@ namespace AlarmClockTest
             // Check if an alarm entry has been created previously. Otherwise create one by calling AddAlarmEntry();
             try
             {
-                alarmEntry = session.FindElementByXPath($"//ListItem[starts-with(@Name, \"{NewAlarmName}\")]");
+                alarmEntry = session.FindElementByXPath($"//ListItem[contains(@Name, \"{NewAlarmName}\")]");
             }
             catch
             {
                 AlarmAdd();
-                alarmEntry = session.FindElementByXPath($"//ListItem[starts-with(@Name, \"{NewAlarmName}\")]");
+                alarmEntry = session.FindElementByXPath($"//ListItem[contains(@Name, \"{NewAlarmName}\")]");
             }
 
             Assert.IsNotNull(alarmEntry);
@@ -100,7 +100,7 @@ namespace AlarmClockTest
             {
                 try
                 {
-                    var alarmEntry = session.FindElementByXPath($"//ListItem[starts-with(@Name, \"{NewAlarmName}\")]");
+                    var alarmEntry = session.FindElementByXPath($"//ListItem[contains(@Name, \"{NewAlarmName}\")]");
                     session.Mouse.ContextClick(alarmEntry.Coordinates);
                     session.FindElementByName("Delete").Click();
                 }
